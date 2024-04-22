@@ -1,0 +1,5 @@
+config-reload: '&#ffdd00Конфигурация перезагружена.'
+error-int: '&#ffdd00Количество должно быть числом!'
+unknown-command: '&#ffdd00Неизвестная команда.'
+give-message: '&#ffdd00Вы выдали %amount% кирок игроку %target%.'
+empty-number-argument: '&#ffdd00Введите число'
