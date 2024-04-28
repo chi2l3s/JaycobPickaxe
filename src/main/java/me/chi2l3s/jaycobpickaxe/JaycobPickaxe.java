@@ -21,8 +21,8 @@ public final class JaycobPickaxe extends JavaPlugin {
         createCustomConfig();
         getCommand("jp").setExecutor(new GiveCommand(this));
         getServer().getPluginManager().registerEvents(new PlayerSpawnerBreakListener(this),this);
-        getLogger().info("[JaycobPickaxe] Дискорд сервер");
-        getLogger().info("https://discord.gg/JXFbN5NMDX");
+        getLogger().info("Лучшие бесплатные плагины тут 👇");
+        getLogger().info("https://discord.gg/JXFbN5NMDX                   ");
     }
 
     private void createCustomConfig() {
@@ -41,6 +41,7 @@ public final class JaycobPickaxe extends JavaPlugin {
         }
     }
 
+
     public FileConfiguration getMessagesConfig() {
         return this.messagesConfigFile;
     }
@@ -53,5 +54,4 @@ public final class JaycobPickaxe extends JavaPlugin {
             e.printStackTrace();
         }
     }
-
 }
