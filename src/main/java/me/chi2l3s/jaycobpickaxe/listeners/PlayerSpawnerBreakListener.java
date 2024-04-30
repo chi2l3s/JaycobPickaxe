@@ -34,6 +34,9 @@ public class PlayerSpawnerBreakListener implements Listener {
 
         CreatureSpawner spawnerBlockState = (CreatureSpawner) spawnerBlock.getState();
 
+        // Проверка на null
+        if (spawnerBlockState.getSpawnedType() == null) return null;
+
         ItemStack spawnerItem = new ItemStack(Material.SPAWNER);
         BlockStateMeta spawnerMeta = (BlockStateMeta) spawnerItem.getItemMeta();
         CreatureSpawner spawnerState = (CreatureSpawner) spawnerMeta.getBlockState();
@@ -53,30 +56,34 @@ public class PlayerSpawnerBreakListener implements Listener {
         spawnerMeta.setLore(coloredLore);
         spawnerItem.setItemMeta(spawnerMeta);
 
-
         NBTItem nbtItem = new NBTItem(spawnerItem);
         nbtItem.setString("mobType", spawnerBlockState.getSpawnedType().name());
         return nbtItem.getItem();
     }
 
 
+
     @EventHandler
     public void onPlayerSpawnerBreak(BlockBreakEvent e) {
         Player player = e.getPlayer();
         ItemStack pickaxe = e.getPlayer().getItemInHand();
+        String material = plugin.getConfig().getString("pickaxe.material");
 
-        if (e.getBlock().getType() == Material.SPAWNER) {
-            if (pickaxe.getItemMeta().getDisplayName().equalsIgnoreCase(ColorUtil.message(ChatColor.translateAlternateColorCodes('&',plugin.getConfig().getString("pickaxe.display-name"))))) {
-                ItemStack spawnerItem = getSpawnerItem(e.getBlock());
-                if (spawnerItem != null) {
-                    e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation(), spawnerItem);
-                    player.getInventory().removeItem(pickaxe);
-                    Sound sound = Sound.valueOf(plugin.getConfig().getString("spawner.sound"));
-                    player.playSound(player.getLocation(), sound, 1.0f,1.0f);
+        if (pickaxe != null && pickaxe.getItemMeta() != null) {
+            if (e.getBlock().getType() == Material.SPAWNER) {
+                if (pickaxe.getType().toString().equals(material) && pickaxe.getItemMeta().getDisplayName().equalsIgnoreCase(ColorUtil.message(ChatColor.translateAlternateColorCodes('&',plugin.getConfig().getString("pickaxe.display-name"))))) {
+                    ItemStack spawnerItem = getSpawnerItem(e.getBlock());
+                    if (spawnerItem != null) {
+                        e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation(), spawnerItem);
+                        player.getInventory().removeItem(pickaxe);
+                        Sound sound = Sound.valueOf(plugin.getConfig().getString("spawner.sound"));
+                        player.playSound(player.getLocation(), sound, 1.0f,1.0f);
+                    }
                 }
             }
         }
     }
+
 
 
     @EventHandler
