@@ -6,7 +6,7 @@
 
   <groupId>me.chi2l3s</groupId>
   <artifactId>JaycobPickaxe</artifactId>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>JaycobPickaxe</name>
